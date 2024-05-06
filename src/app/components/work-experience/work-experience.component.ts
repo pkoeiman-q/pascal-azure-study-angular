@@ -12,9 +12,12 @@ export class WorkExperienceComponent {
   @Input() workExperience: WorkExperience = {
     title: "",
     description: "",
-    date: new Date(Date.now())
+    date: new Date(Date.now()),
+    dateDisplay: ""
   }
+
   constructor() {}
   ngOnInit(): void {
+    this.workExperience.dateDisplay = this.workExperience.date.toString().substring(0, 10)
   }
 }

@@ -8,7 +8,7 @@ export class PortfolioServiceService {
 
   constructor(private http: HttpClient) { }
 
-  testCall() {
-    return this.http.get("https://pascalazurestudyapi20240405105805.azurewebsites.net/api/Portfolios/3", {responseType: 'text'});
+  testCall(portfolioId: string) {
+    return this.http.get(`https://pascalazurestudyapi20240405105805.azurewebsites.net/api/Portfolios/${portfolioId}`, {responseType: 'text'});
   }
 }
