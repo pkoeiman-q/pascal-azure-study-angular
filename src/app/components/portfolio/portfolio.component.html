@@ -1,4 +1,12 @@
-<fa-icon [ngStyle]="{'color': 'green'}" [icon]="faSuitcase"></fa-icon>
-<p>Item ID: {{portfolio.id}}</p>
-<p>Portfolio ID:{{portfolio.portfolioId}}</p>
-<app-work-experience *ngFor="let exp of portfolio.experiences" [workExperience]="exp"></app-work-experience>
+<div class="container">
+  <div class="card w-100">
+    <div class="card-header">
+      <h5 class="card-title">Prior work experience</h5>
+      <p>Item ID: {{portfolio.id}}</p>
+      <p>Portfolio ID: {{portfolio.portfolioId}}</p>
+    </div>
+    <ul class="list-group list-group-flush">
+      <app-work-experience *ngFor="let exp of portfolio.experiences" [workExperience]="exp"></app-work-experience>
+    </ul>
+  </div>
+</div>

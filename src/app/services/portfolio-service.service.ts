@@ -7,7 +7,8 @@ import { HttpClient } from '@angular/common/http';
 export class PortfolioServiceService {
 
   constructor(private http: HttpClient) { }
+
   testCall() {
-    return this.http.get("https://httpbin.org/get");
+    return this.http.get("https://pascalazurestudyapi20240405105805.azurewebsites.net/api/Portfolios/3", {responseType: 'text'});
   }
 }
