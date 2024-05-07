@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { NavbarComponent } from './components/navbar/navbar.component';
-import { PortfolioComponent } from './components/portfolio/portfolio.component';
+import { NavbarComponent } from './components/shared/navbar/navbar.component';
+import { PortfolioComponent } from './components/routes/portfolio-view/portfolio/portfolio.component';
 import { NgbModule, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
