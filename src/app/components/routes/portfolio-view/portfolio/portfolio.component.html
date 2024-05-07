@@ -9,4 +9,7 @@
     </div>
     <app-work-experience *ngFor="let exp of portfolio.experiences" [workExperience]="exp"></app-work-experience>
   </div>
+
+  <a routerLink="/portfolio" routerLinkActive="active" ariaCurrentWhenActive="page">Portfolio</a>
+  <a routerLink="/search-portfolio" routerLinkActive="active" ariaCurrentWhenActive="page">Search portfolios</a>
 </div>

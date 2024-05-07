@@ -5,11 +5,12 @@ import { WorkExperienceComponent } from '../work-experience/work-experience.comp
 import { faSuitcase } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { PortfolioServiceService } from '../../../../services/portfolio-service.service';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-portfolio',
   standalone: true,
-  imports: [CommonModule, WorkExperienceComponent, FontAwesomeModule],
+  imports: [CommonModule, WorkExperienceComponent, FontAwesomeModule, RouterModule],
   templateUrl: './portfolio.component.html',
   styleUrl: './portfolio.component.scss'
 })
