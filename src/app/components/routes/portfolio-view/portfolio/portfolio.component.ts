@@ -16,13 +16,17 @@ import { RouterModule } from '@angular/router';
 })
 
 export class PortfolioComponent {
-  @Input() portfolio: Portfolio = {
+  portfolio: Portfolio = {
     experiences: [],
     id: "",
     name: "Untitled",
     portfolioId: "",
   };
   faSuitcase = faSuitcase;
+
+  @Input() set id(portfolioId: string) {
+    this.getPortfolioWithId(portfolioId);
+  }
 
   constructor(private portfolioService: PortfolioServiceService) {}
 
@@ -33,6 +37,5 @@ export class PortfolioComponent {
   }
 
   ngOnInit(): void {
-    this.getPortfolioWithId("3");
   }
 }

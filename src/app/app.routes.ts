@@ -3,6 +3,6 @@ import { SearchPortfolioComponent } from './components/routes/search-portfolio/s
 import { PortfolioComponent } from './components/routes/portfolio-view/portfolio/portfolio.component';
 
 export const routes: Routes = [
-  { path: 'portfolio', component: PortfolioComponent },
+  { path: 'portfolio/:id', component: PortfolioComponent },
   { path: 'search-portfolio', component: SearchPortfolioComponent },
 ];
