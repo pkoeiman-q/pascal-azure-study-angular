@@ -1,27 +1,55 @@
 <div class="container">
   <ng-template [ngIf]="ready" [ngIfElse]="notReady">
-    <div class="card w-100">
-      <div class="text-primary mb-3 card-header">
-        <div class="d-flex justify-content-between">
-          <h5 class="card-title">{{portfolio.name}}</h5>
-          <button class="btn btn-primary" (click)="refresh(queryId)">Refresh data</button>
+    @switch (httpStatus) {
+      @case (200) {
+        <div class="card w-100">
+          <div class="text-primary mb-3 card-header">
+            <div class="d-flex justify-content-between">
+              <h5 class="card-title">{{portfolio.name}}</h5>
+              <button class="btn btn-primary" (click)="refresh(queryId)">Refresh data</button>
+            </div>
+            <h6 class="card-subtitle mb-2">ID: {{portfolio.id}}</h6>
+          </div>
+          <div class="card-body py-0">
+            <i class="card-subtitle">Prior work experience:</i>
+          </div>
+          <app-work-experience *ngFor="let exp of portfolio.experiences" [workExperience]="exp"></app-work-experience>
         </div>
-        <h6 class="card-subtitle mb-2">ID: {{portfolio.id}}</h6>
-      </div>
-      <div class="card-body py-0">
-        <i class="card-subtitle">Prior work experience:</i>
-      </div>
-      <app-work-experience *ngFor="let exp of portfolio.experiences" [workExperience]="exp"></app-work-experience>
-    </div>
+      }
+
+      @case (500) {
+        <div class="card w-100">
+          <div class="text-danger card-header">
+            <h5 class="card-title">An error occured while retrieving the portfolio.</h5>
+          </div>
+          <div class="card-body">
+            <p class="card-text">Please try again later.</p>
+          </div>
+        </div>
+      }
+
+      @case (401) {
+        <div class="card w-100">
+          <div class="text-muted card-header">
+            <h5 class="card-title">The portfolio with the given ID has not been found.</h5>
+          </div>
+          <div class="card-body">
+            <p class="card-text">Please try searching for a different ID.</p>
+          </div>
+        </div>
+      }
+    }
   </ng-template>
 
   <ng-template #notReady>
-    <div class="card w-100">
-      <div class="text-primary mb-3 card-header">
-        <h5 class="card-title">Loading portfolio data...</h5>
-      </div>
-      <div class="card-body">
-        <p class="card-text">Data related to this portfolio will be displayed once it has loaded in.</p>
+    <div>
+      <div class="card w-100">
+        <div class="text-primary card-header">
+          <h5 class="card-title">Loading portfolio data...</h5>
+        </div>
+        <div class="card-body">
+          <p class="card-text">...</p>
+        </div>
       </div>
     </div>
   </ng-template>

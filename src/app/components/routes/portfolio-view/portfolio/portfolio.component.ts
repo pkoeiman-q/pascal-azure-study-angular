@@ -6,6 +6,8 @@ import { faSuitcase } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { PortfolioServiceService } from '../../../../services/portfolio-service.service';
 import { RouterModule } from '@angular/router';
+import { catchError, throwError } from 'rxjs';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-portfolio',
@@ -22,6 +24,7 @@ export class PortfolioComponent {
   }
 
   ready = false;
+  httpStatus = 200;
   portfolio: Portfolio = {
     experiences: [],
     id: "",
@@ -30,19 +33,45 @@ export class PortfolioComponent {
   };
   faSuitcase = faSuitcase;
 
-  constructor(private portfolioService: PortfolioServiceService) {}
+  constructor(private portfolioService: PortfolioServiceService) {
+    this.handleError = this.handleError.bind(this)
+  }
+
+  readyView() : void {
+    this.ready = true;
+  }
+
+  unreadyView() : void {
+    this.httpStatus = 200;
+    this.ready = false;
+  }
 
   getPortfolioWithId(portfolioId: string) : void {
-    this.ready = false;
+    this.unreadyView();
     this.queryId = portfolioId;
-    this.portfolioService.testCall(portfolioId).subscribe(data => {
-      this.portfolio = JSON.parse(data);
-      this.ready = true;
-    })
+    this.portfolioService.testCall(portfolioId)
+    .pipe(
+      catchError(this.handleError)
+    )
+    .subscribe(
+      data => {
+        this.portfolio = JSON.parse(data);
+        this.readyView();
+      }
+    )
+  }
+
+  handleError(error: HttpErrorResponse) {
+    this.httpStatus = error.status;
+    this.readyView();
+
+    if (error.status === 401) {
+      return throwError(() => new Error("Portfolio was not found!"))
+    }
+    return throwError(() => new Error("Couldn't find portfolio!"))
   }
 
   refresh(portfolioId: string) : void {
-    this.ready = false;
     this.getPortfolioWithId(portfolioId);
   }
 }
