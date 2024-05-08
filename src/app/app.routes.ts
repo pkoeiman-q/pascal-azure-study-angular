@@ -1,8 +1,8 @@
 import { Routes } from '@angular/router';
-import { SearchPortfolioComponent } from './components/routes/search-portfolio/search-portfolio.component';
 import { PortfolioComponent } from './components/routes/portfolio-view/portfolio/portfolio.component';
+import { LoginComponent } from './components/routes/authentication/login/login.component';
 
 export const routes: Routes = [
   { path: 'portfolio/:id', component: PortfolioComponent },
-  { path: 'search-portfolio', component: SearchPortfolioComponent },
+  { path: 'login', component: LoginComponent }
 ];

@@ -7,7 +7,7 @@ import { NgbModule, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, NavbarComponent, PortfolioComponent, NgbModule, RouterLink, RouterLinkActive],
+  imports: [RouterOutlet, NavbarComponent, NgbModule, RouterLink, RouterLinkActive],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
