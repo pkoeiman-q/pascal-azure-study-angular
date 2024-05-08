@@ -65,10 +65,12 @@ export class PortfolioComponent {
     this.httpStatus = error.status;
     this.readyView();
 
-    if (error.status === 401) {
-      return throwError(() => new Error("Portfolio was not found!"))
+    switch (error.status) {
+      case 404:
+        return throwError(() => new Error("Portfolio was not found!"))
+      default:
+        return throwError(() => new Error("Couldn't find portfolio!"))
     }
-    return throwError(() => new Error("Couldn't find portfolio!"))
   }
 
   refresh(portfolioId: string) : void {
