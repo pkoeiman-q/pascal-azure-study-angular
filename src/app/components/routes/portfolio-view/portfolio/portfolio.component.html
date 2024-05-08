@@ -6,7 +6,6 @@
           <div class="text-primary mb-3 card-header">
             <div class="d-flex justify-content-between">
               <h5 class="card-title">{{portfolio.name}}</h5>
-              <button class="btn btn-primary" (click)="refresh(queryId)">Refresh data</button>
             </div>
             <h6 class="card-subtitle mb-2">ID: {{portfolio.id}}</h6>
           </div>
@@ -53,4 +52,7 @@
       </div>
     </div>
   </ng-template>
+
+  <br>
+  <button class="btn btn-primary" (click)="refresh(queryId)">Refresh data</button>
 </div>
