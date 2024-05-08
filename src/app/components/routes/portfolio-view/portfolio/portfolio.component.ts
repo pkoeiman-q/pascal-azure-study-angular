@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Portfolio } from '../../../../interfaces/Portfolio';
 import { CommonModule } from '@angular/common';
 import { WorkExperienceComponent } from '../work-experience/work-experience.component';
@@ -16,6 +16,12 @@ import { RouterModule } from '@angular/router';
 })
 
 export class PortfolioComponent {
+  @Input() queryId = "";
+  @Input() set id(portfolioId: string) {
+    this.getPortfolioWithId(portfolioId);
+  }
+
+  ready = false;
   portfolio: Portfolio = {
     experiences: [],
     id: "",
@@ -24,18 +30,19 @@ export class PortfolioComponent {
   };
   faSuitcase = faSuitcase;
 
-  @Input() set id(portfolioId: string) {
-    this.getPortfolioWithId(portfolioId);
-  }
-
   constructor(private portfolioService: PortfolioServiceService) {}
 
   getPortfolioWithId(portfolioId: string) : void {
+    this.ready = false;
+    this.queryId = portfolioId;
     this.portfolioService.testCall(portfolioId).subscribe(data => {
       this.portfolio = JSON.parse(data);
+      this.ready = true;
     })
   }
 
-  ngOnInit(): void {
+  refresh(portfolioId: string) : void {
+    this.ready = false;
+    this.getPortfolioWithId(portfolioId);
   }
 }
